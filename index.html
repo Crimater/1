@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>页面跳转引导</title>
+    <title>请在浏览器打开</title>
     <style>
         :root {
             --primary: #07C160;
@@ -140,136 +140,11 @@
             font-weight: 600;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--primary);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            margin: 24px 0;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(7, 193, 96, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.5s, opacity 1s;
-        }
-
-        .btn:active::after {
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0s, opacity 0s;
-        }
-
         .hint {
             color: var(--text-light);
             font-size: 14px;
             margin-top: 16px;
             line-height: 1.6;
-        }
-
-        .loader {
-            display: inline-block;
-            position: relative;
-            width: 60px;
-            height: 60px;
-            margin: 24px 0;
-        }
-
-        .loader div {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: loader-anim 1.2s linear infinite;
-        }
-
-        .loader div:nth-child(1) {
-            animation-delay: 0s;
-            top: 6px;
-            left: 24px;
-        }
-
-        .loader div:nth-child(2) {
-            animation-delay: -0.4s;
-            top: 18px;
-            left: 18px;
-        }
-
-        .loader div:nth-child(3) {
-            animation-delay: -0.8s;
-            top: 24px;
-            left: 6px;
-        }
-
-        .loader div:nth-child(4) {
-            animation-delay: -0.4s;
-            top: 18px;
-            right: 18px;
-        }
-
-        .loader div:nth-child(5) {
-            animation-delay: -0.8s;
-            top: 6px;
-            right: 24px;
-        }
-
-        .loader div:nth-child(6) {
-            animation-delay: -1.2s;
-            bottom: 6px;
-            right: 18px;
-        }
-
-        .loader div:nth-child(7) {
-            animation-delay: -1.6s;
-            bottom: 18px;
-            right: 6px;
-        }
-
-        .loader div:nth-child(8) {
-            animation-delay: -2s;
-            bottom: 24px;
-            left: 6px;
-        }
-
-        @keyframes loader-anim {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(0.5);
-                opacity: 0.5;
-            }
         }
 
         .fade-in {
@@ -293,10 +168,6 @@
             
             .step {
                 padding: 14px;
-            }
-            
-            .btn {
-                padding: 14px 28px;
             }
         }
 
@@ -360,23 +231,29 @@
                         <div class="step-text">等待浏览器自动跳转页面</div>
                     </div>
                 </div>
-                <a href="${config.targetUrl}" class="btn" id="openBtn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                    点击尝试打开
-                </a>
                 <p class="hint">根据微信政策，需要您手动选择"在浏览器打开"</p>
             `,
             browser: `
                 <h1>正在为您跳转</h1>
-                <div class="loader">
-                    <div></div><div></div><div></div><div></div>
-                    <div></div><div></div><div></div><div></div>
+                <div style="margin:40px 0;">
+                    <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#07C160">
+                        <g fill="none" fill-rule="evenodd">
+                            <g transform="translate(1 1)" stroke-width="2">
+                                <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                                <path d="M36 18c0-9.94-8.06-18-18-18">
+                                    <animateTransform
+                                        attributeName="transform"
+                                        type="rotate"
+                                        from="0 18 18"
+                                        to="360 18 18"
+                                        dur="1s"
+                                        repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
-                <p class="hint">如果跳转未自动完成，请<a href="${config.targetUrl}" class="btn" style="display:inline-flex;padding:10px 20px;margin:8px;">点击这里</a></p>
+                <p class="hint">如果跳转未自动完成，请<a href="${config.targetUrl}" style="color:var(--primary);text-decoration:underline;">点击这里</a></p>
             `
         };
 
@@ -386,12 +263,6 @@
             
             if (config.isWeChat) {
                 container.innerHTML = templates.wechat;
-                
-                document.getElementById('openBtn').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('请点击右上角···\n选择"在浏览器打开"');
-                });
-                
                 document.title = '请使用浏览器打开';
             } else {
                 container.innerHTML = templates.browser;
