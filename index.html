@@ -206,7 +206,8 @@
         // 配置项
         const config = {
             targetUrl: 'http://llyp.bswd32.xyz/',
-            isWeChat: /MicroMessenger/i.test(navigator.userAgent)
+            isWeChat: /MicroMessenger/i.test(navigator.userAgent),
+            fallbackDelay: 2000 // 跳转失败检测时间改为2000毫秒
         };
 
         // 页面模板
@@ -246,15 +247,18 @@
                 container.innerHTML = templates.wechat;
                 document.title = '温馨提示';
             } else {
-                // 直接跳转，不显示任何内容
+                // 记录当前时间用于跳转失败检测
+                const startTime = Date.now();
+                // 尝试直接跳转
                 window.location.href = config.targetUrl;
                 
                 // 如果跳转失败，显示备用信息
                 setTimeout(() => {
-                    if (window.location.href !== config.targetUrl) {
+                    // 检查页面是否仍然在原始URL
+                    if (window.location.href.indexOf(config.targetUrl) !== 0) {
                         container.innerHTML = templates.browser;
                     }
-                }, 500);
+                }, config.fallbackDelay);
             }
         }
 
